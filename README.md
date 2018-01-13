@@ -11,12 +11,15 @@ I downloaded on January 13 2018, and in this repo the filename is
 and found out that it must be edited to work.
 
 On `p5.json` I have modified the original JSON file so that it could work with
-tern_for_vim plugin. It only works for `p5.js`, not `p5.dom` or `p5.sound`.
+tern_for_vim plugin. It works for `p5.js` and `p5.dom`, but not `p5.sound`.
 Note that in the original def file there are some functions named `undefined`,
 which I deleted on the def file that I modified.
 
+The def file is far from perfect. A lot of it I modified manually based on my
+crude understanding of the def file's syntax.
+
 TODO:
 - [x] Tern def file for `p5.js`
-- [ ] Tern def file for `p5.dom`
+- [x] Tern def file for `p5.dom`
 - [ ] Tern def file for `p5.sound`
 - [ ] Maybe automate the process
