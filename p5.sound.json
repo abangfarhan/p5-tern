@@ -1,0 +1,1393 @@
+{
+  "name": "p5.sound.js",
+  "!define": {
+    "p5": {
+      "SoundFile": {
+        "!type": "fn(path: string, successCallback?: fn(), errorCallback?: fn(), whileLoadingCallback?: fn()) -> +p5.SoundFile",
+        "!doc": "SoundFile object with a path to a file.\n\nThe p5.SoundFile may not be available immediately because\nit loads the file information asynchronously.\n\nTo do something with the sound as soon as it loads\npass the name of a function as the second parameter.\n\nOnly one file path is required. However, audio file formats\n(i.e. mp3, ogg, wav and m4a/aac) are not supported by all\nweb browsers. If you want to ensure compatability, instead of a single\nfile path, you may include an Array of filepaths, and the browser will\nchoose a format that works.",
+        "!url": "https://p5js.org/reference/#/p5/p5.SoundFile",
+        "prototype": {
+          "loadSound": {
+            "!type": "fn(path: string, successCallback?: fn(), errorCallback?: fn(), whileLoading?: fn()) -> +p5.SoundFile",
+            "!doc": "loadSound() returns a new p5.SoundFile from a specified\npath. If called during preload(), the p5.SoundFile will be ready\nto play in time for setup() and draw(). If called outside of\npreload, the p5.SoundFile will not be ready immediately, so\nloadSound accepts a callback as the second parameter. Using a\n<a href=\"https://github.com/processing/p5.js/wiki/Local-server\">\nlocal server</a> is recommended when loading external files.\n",
+            "!url": "https://p5js.org/reference/#/p5/loadSound"
+          },
+          "isLoaded": {
+            "!type": "fn() -> bool",
+            "!doc": "Returns true if the sound file finished loading successfully.\n",
+            "!url": "https://p5js.org/reference/#/p5/isLoaded"
+          },
+          "play": {
+            "!type": "fn(startTime?: number, rate?: number, amp?: number, cueStart?: number, duration?: number)",
+            "!doc": "Play the p5.SoundFile\n",
+            "!url": "https://p5js.org/reference/#/p5/play"
+          },
+          "playMode": {
+            "!type": "fn(str: string)",
+            "!doc": "p5.SoundFile has two play modes: <code>restart</code> and\n<code>sustain</code>. Play Mode determines what happens to a\np5.SoundFile if it is triggered while in the middle of playback.\nIn sustain mode, playback will continue simultaneous to the\nnew playback. In restart mode, play() will stop playback\nand start over. With untilDone, a sound will play only if it&#39;s\nnot already playing. Sustain is the default mode.\n",
+            "!url": "https://p5js.org/reference/#/p5/playMode"
+          },
+          "pause": {
+            "!type": "fn(startTime?: number)",
+            "!doc": "Pauses a file that is currently playing. If the file is not\nplaying, then nothing will happen.\nAfter pausing, .play() will resume from the paused\nposition.\nIf p5.SoundFile had been set to loop before it was paused,\nit will continue to loop after it is unpaused with .play().\n",
+            "!url": "https://p5js.org/reference/#/p5/pause"
+          },
+          "loop": {
+            "!type": "fn(startTime?: number, rate?: number, amp?: number, cueLoopStart?: number, duration?: number)",
+            "!doc": "Loop the p5.SoundFile. Accepts optional parameters to set the\nplayback rate, playback volume, loopStart, loopEnd.\n",
+            "!url": "https://p5js.org/reference/#/p5/loop"
+          },
+          "setLoop": {
+            "!type": "fn(Boolean: bool)",
+            "!doc": "Set a p5.SoundFile&#39;s looping flag to true or false. If the sound\nis currently playing, this change will take effect when it\nreaches the end of the current playback.\n",
+            "!url": "https://p5js.org/reference/#/p5/setLoop"
+          },
+          "isLooping": {
+            "!type": "fn() -> bool",
+            "!doc": "Returns &#39;true&#39; if a p5.SoundFile is currently looping and playing, &#39;false&#39; if not.\n",
+            "!url": "https://p5js.org/reference/#/p5/isLooping"
+          },
+          "isPlaying": {
+            "!type": "fn() -> bool",
+            "!doc": "Returns true if a p5.SoundFile is playing, false if not (i.e.\npaused or stopped).\n",
+            "!url": "https://p5js.org/reference/#/p5/isPlaying"
+          },
+          "isPaused": {
+            "!type": "fn() -> bool",
+            "!doc": "Returns true if a p5.SoundFile is paused, false if not (i.e.\nplaying or stopped).\n",
+            "!url": "https://p5js.org/reference/#/p5/isPaused"
+          },
+          "stop": {
+            "!type": "fn(startTime?: number)",
+            "!doc": "Stop soundfile playback.\n",
+            "!url": "https://p5js.org/reference/#/p5/stop"
+          },
+          "setVolume": {
+            "!type": "fn(volume: number, rampTime?: number, timeFromNow?: number)",
+            "!doc": "Multiply the output volume (amplitude) of a sound file\nbetween 0.0 (silence) and 1.0 (full volume).\n1.0 is the maximum amplitude of a digital sound, so multiplying\nby greater than 1.0 may cause digital distortion. To\nfade, provide a <code>rampTime</code> parameter. For more\ncomplex fades, see the Env class.\nAlternately, you can pass in a signal source such as an\noscillator to modulate the amplitude with an audio signal.\n",
+            "!url": "https://p5js.org/reference/#/p5/setVolume"
+          },
+          "pan": {
+            "!type": "fn(panValue?: number, timeFromNow?: number)",
+            "!doc": "Set the stereo panning of a p5.sound object to\na floating point number between -1.0 (left) and 1.0 (right).\nDefault is 0.0 (center).\n",
+            "!url": "https://p5js.org/reference/#/p5/pan"
+          },
+          "getPan": {
+            "!type": "fn() -> number",
+            "!doc": "Returns the current stereo pan position (-1.0 to 1.0)\n",
+            "!url": "https://p5js.org/reference/#/p5/getPan"
+          },
+          "rate": {
+            "!type": "fn(playbackRate?: number)",
+            "!doc": "Set the playback rate of a sound file. Will change the speed and the pitch.\nValues less than zero will reverse the audio buffer.\n",
+            "!url": "https://p5js.org/reference/#/p5/rate"
+          },
+          "duration": {
+            "!type": "fn() -> number",
+            "!doc": "Returns the duration of a sound file in seconds.\n",
+            "!url": "https://p5js.org/reference/#/p5/duration"
+          },
+          "currentTime": {
+            "!type": "fn() -> number",
+            "!doc": "Return the current position of the p5.SoundFile playhead, in seconds.\nNote that if you change the playbackRate while the p5.SoundFile is\nplaying, the results may not be accurate.\n",
+            "!url": "https://p5js.org/reference/#/p5/currentTime"
+          },
+          "jump": {
+            "!type": "fn(cueTime: number, duration: number)",
+            "!doc": "Move the playhead of the song to a position, in seconds. Start timing\nand playback duration. If none are given, will reset the file to play\nentire duration from start to finish.\n",
+            "!url": "https://p5js.org/reference/#/p5/jump"
+          },
+          "channels": {
+            "!type": "fn() -> number",
+            "!doc": "Return the number of channels in a sound file.\nFor example, Mono = 1, Stereo = 2.\n",
+            "!url": "https://p5js.org/reference/#/p5/channels"
+          },
+          "sampleRate": {
+            "!type": "fn() -> number",
+            "!doc": "Return the sample rate of the sound file.\n",
+            "!url": "https://p5js.org/reference/#/p5/sampleRate"
+          },
+          "frames": {
+            "!type": "fn() -> number",
+            "!doc": "Return the number of samples in a sound file.\nEqual to sampleRate * duration.\n",
+            "!url": "https://p5js.org/reference/#/p5/frames"
+          },
+          "getPeaks": {
+            "!type": "fn(length?: number) -> +Float32Array",
+            "!doc": "Returns an array of amplitude peaks in a p5.SoundFile that can be\nused to draw a static waveform. Scans through the p5.SoundFile&#39;s\naudio buffer to find the greatest amplitudes. Accepts one\nparameter, &#39;length&#39;, which determines size of the array.\nLarger arrays result in more precise waveform visualizations.\nInspired by Wavesurfer.js.\n",
+            "!url": "https://p5js.org/reference/#/p5/getPeaks"
+          },
+          "reverseBuffer": {
+            "!type": "fn()",
+            "!doc": "Reverses the p5.SoundFile&#39;s buffer source.\nPlayback must be handled separately (see example).\n",
+            "!url": "https://p5js.org/reference/#/p5/reverseBuffer"
+          },
+          "onended": {
+            "!type": "fn(callback: fn())",
+            "!doc": "Schedule an event to be called when the soundfile\nreaches the end of a buffer. If the soundfile is\nplaying through once, this will be called when it\nends. If it is looping, it will be called when\nstop is called.\n",
+            "!url": "https://p5js.org/reference/#/p5/onended"
+          },
+          "connect": {
+            "!type": "fn(object?: Object)",
+            "!doc": "Connects the output of a p5sound object to input of another\np5.sound object. For example, you may connect a p5.SoundFile to an\nFFT or an Effect. If no parameter is given, it will connect to\nthe master output. Most p5sound objects connect to the master\noutput when they are created.\n",
+            "!url": "https://p5js.org/reference/#/p5/connect"
+          },
+          "disconnect": {
+            "!type": "fn()",
+            "!doc": "Disconnects the output of this p5sound object.\n",
+            "!url": "https://p5js.org/reference/#/p5/disconnect"
+          },
+          "undefined": {
+            "!type": "fn()",
+            "!url": "https://p5js.org/reference/#/p5/undefined"
+          },
+          "setPath": {
+            "!type": "fn(path: string, callback: fn())",
+            "!doc": "Reset the source for this SoundFile to a\nnew path (URL).\n",
+            "!url": "https://p5js.org/reference/#/p5/setPath"
+          },
+          "setBuffer": {
+            "!type": "fn(buf: Array)",
+            "!doc": "Replace the current Audio Buffer with a new Buffer.\n",
+            "!url": "https://p5js.org/reference/#/p5/setBuffer"
+          },
+          "processPeaks": {
+            "!type": "fn(callback: fn(), initThreshold?: number, minThreshold?: number, minPeaks?: number) -> +Array",
+            "!doc": "processPeaks returns an array of timestamps where it thinks there is a beat.\nThis is an asynchronous function that processes the soundfile in an offline audio context,\nand sends the results to your callback function.\nThe process involves running the soundfile through a lowpass filter, and finding all of the\npeaks above the initial threshold. If the total number of peaks are below the minimum number of peaks,\nit decreases the threshold and re-runs the analysis until either minPeaks or minThreshold are reached.\n",
+            "!url": "https://p5js.org/reference/#/p5/processPeaks"
+          },
+          "addCue": {
+            "!type": "fn(time: number, callback: fn(), value?: Object) -> number",
+            "!doc": "Schedule events to trigger every time a MediaElement\n(audio/video) reaches a playback cue point.\nAccepts a callback function, a time (in seconds) at which to trigger\nthe callback, and an optional parameter for the callback.\nTime will be passed as the first parameter to the callback function,\nand param will be the second parameter.\n",
+            "!url": "https://p5js.org/reference/#/p5/addCue"
+          },
+          "removeCue": {
+            "!type": "fn(id: number)",
+            "!doc": "Remove a callback based on its ID. The ID is returned by the\naddCue method.\n",
+            "!url": "https://p5js.org/reference/#/p5/removeCue"
+          },
+          "clearCues": {
+            "!type": "fn()",
+            "!doc": "Remove all of the callbacks that had originally been scheduled\nvia the addCue method.\n",
+            "!url": "https://p5js.org/reference/#/p5/clearCues"
+          }
+        }
+      }
+    }
+  },
+  "p5": {
+    "Amplitude": {
+      "!type": "fn(smoothing?: number) -> +p5.sound.p5.Amplitude",
+      "!doc": "Amplitude measures volume between 0.0 and 1.0.\nListens to all p5sound by default, or use setInput()\nto listen to a specific sound source. Accepts an optional\nsmoothing value, which defaults to 0.\n",
+      "!url": "https://p5js.org/reference/#/p5/p5.Amplitude",
+      "prototype": {
+        "setInput": {
+          "!type": "fn(snd?: SoundObject, smoothing?: number)",
+          "!doc": "Connects to the p5sound instance (master output) by default.\nOptionally, you can pass in a specific source (i.e. a soundfile).\n",
+          "!url": "https://p5js.org/reference/#/p5/setInput"
+        },
+        "getLevel": {
+          "!type": "fn(channel?: number) -> number",
+          "!doc": "Returns a single Amplitude reading at the moment it is called.\nFor continuous readings, run in the draw loop.\n",
+          "!url": "https://p5js.org/reference/#/p5/getLevel"
+        },
+        "toggleNormalize": {
+          "!type": "fn(boolean?: bool)",
+          "!doc": "Determines whether the results of Amplitude.process() will be\nNormalized. To normalize, Amplitude finds the difference the\nloudest reading it has processed and the maximum amplitude of\n1.0. Amplitude adds this difference to all values to produce\nresults that will reliably map between 0.0 and 1.0. However,\nif a louder moment occurs, the amount that Normalize adds to\nall the values will change. Accepts an optional boolean parameter\n(true or false). Normalizing is off by default.\n",
+          "!url": "https://p5js.org/reference/#/p5/toggleNormalize"
+        },
+        "smooth": {
+          "!type": "fn(set: number)",
+          "!doc": "Smooth Amplitude analysis by averaging with the last analysis\nframe. Off by default.\n",
+          "!url": "https://p5js.org/reference/#/p5/smooth"
+        }
+      }
+    },
+    "FFT": {
+      "!type": "fn(smoothing?: number, bins?: number) -> +p5.sound.p5.FFT",
+      "!doc": "FFT (Fast Fourier Transform) is an analysis algorithm that\nisolates individual\n<a href=\"https://en.wikipedia.org/wiki/Audio_frequency\">\naudio frequencies</a> within a waveform.\n\nOnce instantiated, a p5.FFT object can return an array based on\ntwo types of analyses: <br> • <code>FFT.waveform()</code> computes\namplitude values along the time domain. The array indices correspond\nto samples across a brief moment in time. Each value represents\namplitude of the waveform at that sample of time.<br>\n• <code>FFT.analyze() </code> computes amplitude values along the\nfrequency domain. The array indices correspond to frequencies (i.e.\npitches), from the lowest to the highest that humans can hear. Each\nvalue represents amplitude at that slice of the frequency spectrum.\nUse with <code>getEnergy()</code> to measure amplitude at specific\nfrequencies, or within a range of frequencies. \n\nFFT analyzes a very short snapshot of sound called a sample\nbuffer. It returns an array of amplitude measurements, referred\nto as <code>bins</code>. The array is 1024 bins long by default.\nYou can change the bin array length, but it must be a power of 2\nbetween 16 and 1024 in order for the FFT algorithm to function\ncorrectly. The actual size of the FFT buffer is twice the\nnumber of bins, so given a standard sample rate, the buffer is\n2048/44100 seconds long.",
+      "!url": "https://p5js.org/reference/#/p5/p5.FFT",
+      "prototype": {
+        "setInput": {
+          "!type": "fn(source?: Object)",
+          "!doc": "Set the input source for the FFT analysis. If no source is\nprovided, FFT will analyze all sound in the sketch.\n",
+          "!url": "https://p5js.org/reference/#/p5/setInput"
+        },
+        "waveform": {
+          "!type": "fn(bins?: number, precision?: string) -> +Array",
+          "!doc": "Returns an array of amplitude values (between -1.0 and +1.0) that represent\na snapshot of amplitude readings in a single buffer. Length will be\nequal to bins (defaults to 1024). Can be used to draw the waveform\nof a sound.\n",
+          "!url": "https://p5js.org/reference/#/p5/waveform"
+        },
+        "analyze": {
+          "!type": "fn(bins?: number, scale?: number) -> +Array",
+          "!doc": "Returns an array of amplitude values (between 0 and 255)\nacross the frequency spectrum. Length is equal to FFT bins\n(1024 by default). The array indices correspond to frequencies\n(i.e. pitches), from the lowest to the highest that humans can\nhear. Each value represents amplitude at that slice of the\nfrequency spectrum. Must be called prior to using\n<code>getEnergy()</code>.\n",
+          "!url": "https://p5js.org/reference/#/p5/analyze"
+        },
+        "getEnergy": {
+          "!type": "fn(frequency1: number, frequency2?: number) -> number",
+          "!doc": "Returns the amount of energy (volume) at a specific\n<a href=\"en.wikipedia.org/wiki/Audio_frequency\" target=\"_blank\">\nfrequency</a>, or the average amount of energy between two\nfrequencies. Accepts Number(s) corresponding\nto frequency (in Hz), or a String corresponding to predefined\nfrequency ranges (&quot;bass&quot;, &quot;lowMid&quot;, &quot;mid&quot;, &quot;highMid&quot;, &quot;treble&quot;).\nReturns a range between 0 (no energy/volume at that frequency) and\n255 (maximum energy).\n<em>NOTE: analyze() must be called prior to getEnergy(). Analyze()\ntells the FFT to analyze frequency data, and getEnergy() uses\nthe results determine the value at a specific frequency or\nrange of frequencies.</em></p>\n",
+          "!url": "https://p5js.org/reference/#/p5/getEnergy"
+        },
+        "getCentroid": {
+          "!type": "fn() -> number",
+          "!doc": "Returns the\n<a href=\"http://en.wikipedia.org/wiki/Spectral_centroid\" target=\"_blank\">\nspectral centroid</a> of the input signal.\n<em>NOTE: analyze() must be called prior to getCentroid(). Analyze()\ntells the FFT to analyze frequency data, and getCentroid() uses\nthe results determine the spectral centroid.</em></p>\n",
+          "!url": "https://p5js.org/reference/#/p5/getCentroid"
+        },
+        "smooth": {
+          "!type": "fn(smoothing: number)",
+          "!doc": "Smooth FFT analysis by averaging with the last analysis frame.\n",
+          "!url": "https://p5js.org/reference/#/p5/smooth"
+        },
+        "linAverages": {
+          "!type": "fn(N: number) -> +Array",
+          "!doc": "Returns an array of average amplitude values for a given number\nof frequency bands split equally. N defaults to 16.\n<em>NOTE: analyze() must be called prior to linAverages(). Analyze()\ntells the FFT to analyze frequency data, and linAverages() uses\nthe results to group them into a smaller set of averages.</em></p>\n",
+          "!url": "https://p5js.org/reference/#/p5/linAverages"
+        },
+        "logAverages": {
+          "!type": "fn(octaveBands: Array) -> +Array",
+          "!doc": "Returns an array of average amplitude values of the spectrum, for a given\nset of <a href=\"https://en.wikipedia.org/wiki/Octave_band\" target=\"_blank\">\nOctave Bands</a>\n<em>NOTE: analyze() must be called prior to logAverages(). Analyze()\ntells the FFT to analyze frequency data, and logAverages() uses\nthe results to group them into a smaller set of averages.</em></p>\n",
+          "!url": "https://p5js.org/reference/#/p5/logAverages"
+        },
+        "getOctaveBands": {
+          "!type": "fn(N: number, fCtr0: number) -> +Array",
+          "!doc": "Calculates and Returns the 1/N\n<a href=\"https://en.wikipedia.org/wiki/Octave_band\" target=\"_blank\">Octave Bands</a>\nN defaults to 3 and minimum central frequency to 15.625Hz.\n(1/3 Octave Bands ~= 31 Frequency Bands)\nSetting fCtr0 to a central value of a higher octave will ignore the lower bands\nand produce less frequency groups.\n",
+          "!url": "https://p5js.org/reference/#/p5/getOctaveBands"
+        },
+        "undefined": {
+          "!type": "fn()",
+          "!url": "https://p5js.org/reference/#/p5/undefined"
+        }
+      }
+    },
+    "Signal": {
+      "!type": "fn() -> +p5.sound.p5.Signal",
+      "!doc": "p5.Signal is a constant audio-rate signal used by p5.Oscillator\nand p5.Envelope for modulation math.\n\nThis is necessary because Web Audio is processed on a seprate clock.\nFor example, the p5 draw loop runs about 60 times per second. But\nthe audio clock must process samples 44100 times per second. If we\nwant to add a value to each of those samples, we can&#39;t do it in the\ndraw loop, but we can do it by adding a constant-rate audio signal.</p.\n\n<p>This class mostly functions behind the scenes in p5.sound, and returns\na Tone.Signal from the Tone.js library by Yotam Mann.\nIf you want to work directly with audio signals for modular\nsynthesis, check out\n<a href='http://bit.ly/1oIoEng' target=_'blank'>tone.js.</a>",
+      "!url": "https://p5js.org/reference/#/p5/p5.Signal",
+      "prototype": {
+        "fade": {
+          "!type": "fn(value: number, secondsFromNow?: number)",
+          "!doc": "Fade to value, for smooth transitions\n",
+          "!url": "https://p5js.org/reference/#/p5/fade"
+        },
+        "setInput": {
+          "!type": "fn(input: Object)",
+          "!doc": "Connect a p5.sound object or Web Audio node to this\np5.Signal so that its amplitude values can be scaled.\n",
+          "!url": "https://p5js.org/reference/#/p5/setInput"
+        },
+        "add": {
+          "!type": "fn(number: number) -> +p5.sound.p5.Signal",
+          "!doc": "Add a constant value to this audio signal,\nand return the resulting audio signal. Does\nnot change the value of the original signal,\ninstead it returns a new p5.SignalAdd.\n",
+          "!url": "https://p5js.org/reference/#/p5/add"
+        },
+        "mult": {
+          "!type": "fn(number: number) -> +p5.sound.p5.Signal",
+          "!doc": "Multiply this signal by a constant value,\nand return the resulting audio signal. Does\nnot change the value of the original signal,\ninstead it returns a new p5.SignalMult.\n",
+          "!url": "https://p5js.org/reference/#/p5/mult"
+        },
+        "scale": {
+          "!type": "fn(number: number, inMin: number, inMax: number, outMin: number, outMax: number) -> +p5.sound.p5.Signal",
+          "!doc": "Scale this signal value to a given range,\nand return the result as an audio signal. Does\nnot change the value of the original signal,\ninstead it returns a new p5.SignalScale.\n",
+          "!url": "https://p5js.org/reference/#/p5/scale"
+        }
+      }
+    },
+    "Oscillator": {
+      "!type": "fn(freq?: number, type?: string) -> +p5.sound.p5.Oscillator",
+      "!doc": "Creates a signal that oscillates between -1.0 and 1.0.\nBy default, the oscillation takes the form of a sinusoidal\nshape (&#39;sine&#39;). Additional types include &#39;triangle&#39;,\n&#39;sawtooth&#39; and &#39;square&#39;. The frequency defaults to\n440 oscillations per second (440Hz, equal to the pitch of an\n&#39;A&#39; note).\n\nSet the type of oscillation with setType(), or by instantiating a\nspecific oscillator: <a href=\"/reference/#/p5.SinOsc\">p5.SinOsc</a>, <a\nhref=\"/reference/#/p5.TriOsc\">p5.TriOsc</a>, <a\nhref=\"/reference/#/p5.SqrOsc\">p5.SqrOsc</a>, or <a\nhref=\"/reference/#/p5.SawOsc\">p5.SawOsc</a>.\n",
+      "!url": "https://p5js.org/reference/#/p5/p5.Oscillator",
+      "prototype": {
+        "start": {
+          "!type": "fn(time?: number, frequency?: number)",
+          "!doc": "Start an oscillator. Accepts an optional parameter to\ndetermine how long (in seconds from now) until the\noscillator starts.\n",
+          "!url": "https://p5js.org/reference/#/p5/start"
+        },
+        "stop": {
+          "!type": "fn(secondsFromNow: number)",
+          "!doc": "Stop an oscillator. Accepts an optional parameter\nto determine how long (in seconds from now) until the\noscillator stops.\n",
+          "!url": "https://p5js.org/reference/#/p5/stop"
+        },
+        "amp": {
+          "!type": "fn(vol: number, rampTime?: number, timeFromNow?: number) -> +AudioParam",
+          "!doc": "Set the amplitude between 0 and 1.0. Or, pass in an object\nsuch as an oscillator to modulate amplitude with an audio signal.\n",
+          "!url": "https://p5js.org/reference/#/p5/amp"
+        },
+        "freq": {
+          "!type": "fn(Frequency: number, rampTime?: number, timeFromNow?: number) -> +AudioParam",
+          "!doc": "Set frequency of an oscillator to a value. Or, pass in an object\nsuch as an oscillator to modulate the frequency with an audio signal.\n",
+          "!url": "https://p5js.org/reference/#/p5/freq"
+        },
+        "setType": {
+          "!type": "fn(type: string)",
+          "!doc": "Set type to &#39;sine&#39;, &#39;triangle&#39;, &#39;sawtooth&#39; or &#39;square&#39;.\n",
+          "!url": "https://p5js.org/reference/#/p5/setType"
+        },
+        "connect": {
+          "!type": "fn(unit: Object)",
+          "!doc": "Connect to a p5.sound / Web Audio object.\n",
+          "!url": "https://p5js.org/reference/#/p5/connect"
+        },
+        "disconnect": {
+          "!type": "fn()",
+          "!doc": "Disconnect all outputs\n",
+          "!url": "https://p5js.org/reference/#/p5/disconnect"
+        },
+        "pan": {
+          "!type": "fn(panning: number, timeFromNow: number)",
+          "!doc": "Pan between Left (-1) and Right (1)\n",
+          "!url": "https://p5js.org/reference/#/p5/pan"
+        },
+        "phase": {
+          "!type": "fn(phase: number)",
+          "!doc": "Set the phase of an oscillator between 0.0 and 1.0.\nIn this implementation, phase is a delay time\nbased on the oscillator&#39;s current frequency.\n",
+          "!url": "https://p5js.org/reference/#/p5/phase"
+        },
+        "add": {
+          "!type": "fn(number: number) -> +p5.sound.p5.Oscillator",
+          "!doc": "Add a value to the p5.Oscillator&#39;s output amplitude,\nand return the oscillator. Calling this method again\nwill override the initial add() with a new value.\n",
+          "!url": "https://p5js.org/reference/#/p5/add"
+        },
+        "mult": {
+          "!type": "fn(number: number) -> +p5.sound.p5.Oscillator",
+          "!doc": "Multiply the p5.Oscillator&#39;s output amplitude\nby a fixed value (i.e. turn it up!). Calling this method\nagain will override the initial mult() with a new value.\n",
+          "!url": "https://p5js.org/reference/#/p5/mult"
+        },
+        "scale": {
+          "!type": "fn(inMin: number, inMax: number, outMin: number, outMax: number) -> +p5.sound.p5.Oscillator",
+          "!doc": "Scale this oscillator&#39;s amplitude values to a given\nrange, and return the oscillator. Calling this method\nagain will override the initial scale() with new values.\n",
+          "!url": "https://p5js.org/reference/#/p5/scale"
+        }
+      }
+    },
+    "Env": {
+      "!type": "fn() -> +p5.sound.p5.Env",
+      "!doc": "Envelopes are pre-defined amplitude distribution over time.\nTypically, envelopes are used to control the output volume\nof an object, a series of fades referred to as Attack, Decay,\nSustain and Release (\n<a href=\"https://upload.wikimedia.org/wikipedia/commons/e/ea/ADSR_parameter.svg\">ADSR</a>\n). Envelopes can also control other Web Audio Parameters—for example, a p5.Env can\ncontrol an Oscillator&#39;s frequency like this: <code>osc.freq(env)</code>.\nUse <code><a href=\"#/p5.Env/setRange\">setRange</a></code> to change the attack/release level.\nUse <code><a href=\"#/p5.Env/setADSR\">setADSR</a></code> to change attackTime, decayTime, sustainPercent and releaseTime.\nUse the <code><a href=\"#/p5.Env/play\">play</a></code> method to play the entire envelope,\nthe <code><a href=\"#/p5.Env/ramp\">ramp</a></code> method for a pingable trigger,\nor <code><a href=\"#/p5.Env/triggerAttack\">triggerAttack</a></code>/\n<code><a href=\"#/p5.Env/triggerRelease\">triggerRelease</a></code> to trigger noteOn/noteOff.",
+      "!url": "https://p5js.org/reference/#/p5/p5.Env",
+      "prototype": {
+        "attackTime": {
+          "!type": "?",
+          "!doc": "Time until envelope reaches attackLevel\n",
+          "!url": "https://p5js.org/reference/#/p5/attackTime"
+        },
+        "attackLevel": {
+          "!type": "?",
+          "!doc": "Level once attack is complete.\n",
+          "!url": "https://p5js.org/reference/#/p5/attackLevel"
+        },
+        "decayTime": {
+          "!type": "?",
+          "!doc": "Time until envelope reaches decayLevel.\n",
+          "!url": "https://p5js.org/reference/#/p5/decayTime"
+        },
+        "decayLevel": {
+          "!type": "?",
+          "!doc": "Level after decay. The envelope will sustain here until it is released.\n",
+          "!url": "https://p5js.org/reference/#/p5/decayLevel"
+        },
+        "releaseTime": {
+          "!type": "?",
+          "!doc": "Duration of the release portion of the envelope.\n",
+          "!url": "https://p5js.org/reference/#/p5/releaseTime"
+        },
+        "releaseLevel": {
+          "!type": "?",
+          "!doc": "Level at the end of the release.\n",
+          "!url": "https://p5js.org/reference/#/p5/releaseLevel"
+        },
+        "set": {
+          "!type": "fn(attackTime: number, attackLevel: number, decayTime: number, decayLevel: number, releaseTime: number, releaseLevel: number)",
+          "!doc": "Reset the envelope with a series of time/value pairs.\n",
+          "!url": "https://p5js.org/reference/#/p5/set"
+        },
+        "setADSR": {
+          "!type": "fn(attackTime: number, decayTime?: number, susRatio?: number, releaseTime?: number)",
+          "!doc": "Set values like a traditional\n<a href=\"https://en.wikipedia.org/wiki/Synthesizer#/media/File:ADSR_parameter.svg\">\nADSR envelope\n</a>.\n",
+          "!url": "https://p5js.org/reference/#/p5/setADSR"
+        },
+        "setRange": {
+          "!type": "fn(aLevel: number, rLevel: number)",
+          "!doc": "Set max (attackLevel) and min (releaseLevel) of envelope.\n",
+          "!url": "https://p5js.org/reference/#/p5/setRange"
+        },
+        "setInput": {
+          "!type": "fn(inputs?: Object)",
+          "!doc": "Assign a parameter to be controlled by this envelope.\nIf a p5.Sound object is given, then the p5.Env will control its\noutput gain. If multiple inputs are provided, the env will\ncontrol all of them.\n",
+          "!url": "https://p5js.org/reference/#/p5/setInput"
+        },
+        "setExp": {
+          "!type": "fn(isExp: bool)",
+          "!doc": "Set whether the envelope ramp is linear (default) or exponential.\nExponential ramps can be useful because we perceive amplitude\nand frequency logarithmically.\n",
+          "!url": "https://p5js.org/reference/#/p5/setExp"
+        },
+        "play": {
+          "!type": "fn(unit: Object, startTime?: number, sustainTime?: number)",
+          "!doc": "Play tells the envelope to start acting on a given input.\nIf the input is a p5.sound object (i.e. AudioIn, Oscillator,\nSoundFile), then Env will control its output volume.\nEnvelopes can also be used to control any <a href=\"\nhttp://docs.webplatform.org/wiki/apis/webaudio/AudioParam\">\nWeb Audio Audio Param.</a>\n",
+          "!url": "https://p5js.org/reference/#/p5/play"
+        },
+        "triggerAttack": {
+          "!type": "fn(unit: Object, secondsFromNow: number)",
+          "!doc": "Trigger the Attack, and Decay portion of the Envelope.\nSimilar to holding down a key on a piano, but it will\nhold the sustain level until you let go. Input can be\nany p5.sound object, or a <a href=\"\nhttp://docs.webplatform.org/wiki/apis/webaudio/AudioParam\">\nWeb Audio Param</a>.\n",
+          "!url": "https://p5js.org/reference/#/p5/triggerAttack"
+        },
+        "triggerRelease": {
+          "!type": "fn(unit: Object, secondsFromNow: number)",
+          "!doc": "Trigger the Release of the Envelope. This is similar to releasing\nthe key on a piano and letting the sound fade according to the\nrelease level and release time.\n",
+          "!url": "https://p5js.org/reference/#/p5/triggerRelease"
+        },
+        "ramp": {
+          "!type": "fn(unit: Object, secondsFromNow: number, v: number, v2?: number)",
+          "!doc": "Exponentially ramp to a value using the first two\nvalues from <code><a href=\"#/p5.Env/setADSR\">setADSR(attackTime, decayTime)</a></code>\nas <a href=\"https://en.wikipedia.org/wiki/RC_time_constant\">\ntime constants</a> for simple exponential ramps.\nIf the value is higher than current value, it uses attackTime,\nwhile a decrease uses decayTime.\n",
+          "!url": "https://p5js.org/reference/#/p5/ramp"
+        },
+        "add": {
+          "!type": "fn(number: number) -> +p5.sound.p5.Env",
+          "!doc": "Add a value to the p5.Oscillator&#39;s output amplitude,\nand return the oscillator. Calling this method\nagain will override the initial add() with new values.\n",
+          "!url": "https://p5js.org/reference/#/p5/add"
+        },
+        "mult": {
+          "!type": "fn(number: number) -> +p5.sound.p5.Env",
+          "!doc": "Multiply the p5.Env&#39;s output amplitude\nby a fixed value. Calling this method\nagain will override the initial mult() with new values.\n",
+          "!url": "https://p5js.org/reference/#/p5/mult"
+        },
+        "scale": {
+          "!type": "fn(inMin: number, inMax: number, outMin: number, outMax: number) -> +p5.sound.p5.Env",
+          "!doc": "Scale this envelope&#39;s amplitude values to a given\nrange, and return the envelope. Calling this method\nagain will override the initial scale() with new values.\n",
+          "!url": "https://p5js.org/reference/#/p5/scale"
+        }
+      }
+    },
+    "Pulse": {
+      "!type": "fn(freq?: number, w?: number) -> +p5.sound.p5.Pulse",
+      "!proto": "p5.sound.p5.Oscillator",
+      "!doc": "Creates a Pulse object, an oscillator that implements\nPulse Width Modulation.\nThe pulse is created with two oscillators.\nAccepts a parameter for frequency, and to set the\nwidth between the pulses. See <a href=\"\nhttp://p5js.org/reference/#/p5.Oscillator\">\n<code>p5.Oscillator</code> for a full list of methods.\n",
+      "!url": "https://p5js.org/reference/#/p5/p5.Pulse",
+      "prototype": {
+        "width": {
+          "!type": "fn(width?: number)",
+          "!doc": "Set the width of a Pulse object (an oscillator that implements\nPulse Width Modulation).\n",
+          "!url": "https://p5js.org/reference/#/p5/width"
+        }
+      }
+    },
+    "Noise": {
+      "!type": "fn(type: string) -> +p5.sound.p5.Noise",
+      "!proto": "p5.sound.p5.Oscillator",
+      "!doc": "Noise is a type of oscillator that generates a buffer with random values.\n",
+      "!url": "https://p5js.org/reference/#/p5/p5.Noise",
+      "prototype": {
+        "setType": {
+          "!type": "fn(type?: string)",
+          "!doc": "Set type of noise to &#39;white&#39;, &#39;pink&#39; or &#39;brown&#39;.\nWhite is the default.\n",
+          "!url": "https://p5js.org/reference/#/p5/setType"
+        },
+        "start": {
+          "!type": "fn()",
+          "!doc": "Start the noise\n",
+          "!url": "https://p5js.org/reference/#/p5/start"
+        },
+        "stop": {
+          "!type": "fn()",
+          "!doc": "Stop the noise.\n",
+          "!url": "https://p5js.org/reference/#/p5/stop"
+        },
+        "pan": {
+          "!type": "fn(panning: number, timeFromNow: number)",
+          "!doc": "Pan the noise.\n",
+          "!url": "https://p5js.org/reference/#/p5/pan"
+        },
+        "amp": {
+          "!type": "fn(volume: number, rampTime?: number, timeFromNow?: number)",
+          "!doc": "Set the amplitude of the noise between 0 and 1.0. Or,\nmodulate amplitude with an audio signal such as an oscillator.\n",
+          "!url": "https://p5js.org/reference/#/p5/amp"
+        },
+        "connect": {
+          "!type": "fn(unit: Object)",
+          "!doc": "Send output to a p5.sound or web audio object\n",
+          "!url": "https://p5js.org/reference/#/p5/connect"
+        },
+        "disconnect": {
+          "!type": "fn()",
+          "!doc": "Disconnect all output.\n",
+          "!url": "https://p5js.org/reference/#/p5/disconnect"
+        }
+      }
+    },
+    "AudioIn": {
+      "!type": "fn(errorCallback?: fn()) -> +p5.sound.p5.AudioIn",
+      "!doc": "Get audio from an input, i.e. your computer&#39;s microphone.\n\nTurn the mic on/off with the start() and stop() methods. When the mic\nis on, its volume can be measured with getLevel or by connecting an\nFFT object.\n\nIf you want to hear the AudioIn, use the .connect() method.\nAudioIn does not connect to p5.sound output by default to prevent\nfeedback.\n\n<em>Note: This uses the <a href=\"http://caniuse.com/stream\">getUserMedia/\nStream</a> API, which is not supported by certain browsers. Access in Chrome browser\nis limited to localhost and https, but access over http may be limited.</em>",
+      "!url": "https://p5js.org/reference/#/p5/p5.AudioIn",
+      "prototype": {
+        "enabled": {
+          "!type": "bool",
+          "!doc": "Client must allow browser to access their microphone / audioin source.\nDefault: false. Will become true when the client enables acces.\n",
+          "!url": "https://p5js.org/reference/#/p5/enabled"
+        },
+        "start": {
+          "!type": "fn(successCallback?: fn(), errorCallback?: fn())",
+          "!doc": "Start processing audio input. This enables the use of other\nAudioIn methods like getLevel(). Note that by default, AudioIn\nis not connected to p5.sound&#39;s output. So you won&#39;t hear\nanything unless you use the connect() method.<br/>\nCertain browsers limit access to the user&#39;s microphone. For example,\nChrome only allows access from localhost and over https. For this reason,\nyou may want to include an errorCallback—a function that is called in case\nthe browser won&#39;t provide mic access.\n",
+          "!url": "https://p5js.org/reference/#/p5/start"
+        },
+        "stop": {
+          "!type": "fn()",
+          "!doc": "Turn the AudioIn off. If the AudioIn is stopped, it cannot getLevel().\nIf re-starting, the user may be prompted for permission access.\n",
+          "!url": "https://p5js.org/reference/#/p5/stop"
+        },
+        "connect": {
+          "!type": "fn(unit?: Object)",
+          "!doc": "Connect to an audio unit. If no parameter is provided, will\nconnect to the master output (i.e. your speakers).<br/>\n",
+          "!url": "https://p5js.org/reference/#/p5/connect"
+        },
+        "disconnect": {
+          "!type": "fn()",
+          "!doc": "Disconnect the AudioIn from all audio units. For example, if\nconnect() had been called, disconnect() will stop sending\nsignal to your speakers.<br/>\n",
+          "!url": "https://p5js.org/reference/#/p5/disconnect"
+        },
+        "getLevel": {
+          "!type": "fn(smoothing?: number) -> number",
+          "!doc": "Read the Amplitude (volume level) of an AudioIn. The AudioIn\nclass contains its own instance of the Amplitude class to help\nmake it easy to get a microphone&#39;s volume level. Accepts an\noptional smoothing value (0.0 &lt; 1.0). <em>NOTE: AudioIn must\n.start() before using .getLevel().</em><br/>\n",
+          "!url": "https://p5js.org/reference/#/p5/getLevel"
+        },
+        "amp": {
+          "!type": "fn(vol: number, time?: number)",
+          "!doc": "Set amplitude (volume) of a mic input between 0 and 1.0. <br/>\n",
+          "!url": "https://p5js.org/reference/#/p5/amp"
+        },
+        "getSources": {
+          "!type": "fn(callback: fn())",
+          "!doc": "Chrome only. Returns a list of available input sources\nand allows the user to set the media source. Firefox allows\nthe user to choose from input sources in the permissions dialogue\ninstead of enumerating available sources and selecting one.\nNote: in order to have descriptive media names your page must be\nserved over a secure (HTTPS) connection and the page should\nrequest user media before enumerating devices. Otherwise device\nID will be a long device ID number and does not specify device\ntype. For example see\n<a href=\"https://simpl.info/getusermedia/sources/index.html\">https://simpl.info/getusermedia/sources/index.html</a> vs.\n<a href=\"http://simpl.info/getusermedia/sources/index.html\">http://simpl.info/getusermedia/sources/index.html</a>\n",
+          "!url": "https://p5js.org/reference/#/p5/getSources"
+        },
+        "setSource": {
+          "!type": "fn(num: number)",
+          "!doc": "Set the input source. Accepts a number representing a\nposition in the array returned by listSources().\nThis is only available in browsers that support\nMediaStreamTrack.getSources(). Instead, some browsers\ngive users the option to set their own media source.<br/>\n",
+          "!url": "https://p5js.org/reference/#/p5/setSource"
+        },
+        "undefined": {
+          "!type": "fn()",
+          "!url": "https://p5js.org/reference/#/p5/undefined"
+        }
+      }
+    },
+    "Effect": {
+      "!type": "fn(ac?: Object, input?: AudioNode, output?: AudioNode, _drywet?: Object, wet?: AudioNode) -> +p5.sound.p5.Effect",
+      "!doc": "Effect is a base class for audio effects in p5. <br>\nThis module handles the nodes and methods that are \ncommon and useful for current and future effects.\nThis class is extended by <a href=\"reference/#/p5.Distortion\">p5.Distortion</a>, \n<a href=\"reference/#/p5.Compressor\">p5.Compressor</a>,\n<a href=\"reference/#/p5.Delay\">p5.Delay</a>, \n<a href=\"reference/#/p5.Filter\">p5.Filter</a>, \n<a href=\"reference/#/p5.Reverb\">p5.Reverb</a>.\n",
+      "!url": "https://p5js.org/reference/#/p5/p5.Effect",
+      "prototype": {
+        "undefined": {
+          "!type": "fn()",
+          "!doc": "In classes that extend\np5.Effect, connect effect nodes\nto the wet parameter\n",
+          "!url": "https://p5js.org/reference/#/p5/undefined"
+        },
+        "amp": {
+          "!type": "fn(vol?: number, rampTime?: number, tFromNow?: number)",
+          "!doc": "Set the output volume of the filter.\n",
+          "!url": "https://p5js.org/reference/#/p5/amp"
+        },
+        "chain": {
+          "!type": "fn(arguments?: Object)",
+          "!doc": "Link effects together in a chain<br>Example usage: filter.chain(reverb, delay, panner);\nMay be used with an open-ended number of arguments\n",
+          "!url": "https://p5js.org/reference/#/p5/chain"
+        },
+        "drywet": {
+          "!type": "fn(fade?: number)",
+          "!doc": "Adjust the dry/wet value.\n",
+          "!url": "https://p5js.org/reference/#/p5/drywet"
+        },
+        "connect": {
+          "!type": "fn(unit: Object)",
+          "!doc": "Send output to a p5.js-sound, Web Audio Node, or use signal to\ncontrol an AudioParam\n",
+          "!url": "https://p5js.org/reference/#/p5/connect"
+        },
+        "disconnect": {
+          "!type": "fn()",
+          "!doc": "Disconnect all output.\n",
+          "!url": "https://p5js.org/reference/#/p5/disconnect"
+        }
+      }
+    },
+    "Filter": {
+      "!type": "fn(type?: string) -> +p5.sound.p5.Filter",
+      "!proto": "p5.sound.p5.Effect",
+      "!doc": "<p>A p5.Filter uses a Web Audio Biquad Filter to filter\nthe frequency response of an input source. Subclasses\ninclude:</p>\n<ul>\n<li><a href=\"/reference/#/p5.LowPass\"><code>p5.LowPass</code></a>:\nAllows frequencies below the cutoff frequency to pass through,\nand attenuates frequencies above the cutoff.<br/></li>\n<li><a href=\"/reference/#/p5.HighPass\"><code>p5.HighPass</code></a>:\nThe opposite of a lowpass filter. <br/></li>\n<li><a href=\"/reference/#/p5.BandPass\"><code>p5.BandPass</code></a>:\nAllows a range of frequencies to pass through and attenuates\nthe frequencies below and above this frequency range.<br/></li>\n</ul>\nThe <code>.res()</code> method controls either width of the\nbandpass, or resonance of the low/highpass cutoff frequency.\nThis class extends <a href = \"/reference/#/p5.Effect\">p5.Effect</a>.<br>Methods <a href = \"/reference/#/p5.Effect/amp\">amp()</a>, <a href = \"/reference/#/p5.Effect/chain\">chain()</a>, \n<a href = \"/reference/#/p5.Effect/drywet\">drywet()</a>, <a href = \"/reference/#/p5.Effect/connect\">connect()</a>, and \n<a href = \"/reference/#/p5.Effect/disconnect\">disconnect()</a> are available.\n",
+      "!url": "https://p5js.org/reference/#/p5/p5.Filter",
+      "prototype": {
+        "biquadFilter": {
+          "!type": "+DelayNode",
+          "!doc": "The p5.Filter is built with a\n<a href=\"http://www.w3.org/TR/webaudio/#BiquadFilterNode\">\nWeb Audio BiquadFilter Node</a>.\n",
+          "!url": "https://p5js.org/reference/#/p5/biquadFilter"
+        },
+        "process": {
+          "!type": "fn(Signal: Object, freq?: number, res?: number)",
+          "!doc": "Filter an audio signal according to a set\nof filter parameters.\n",
+          "!url": "https://p5js.org/reference/#/p5/process"
+        },
+        "set": {
+          "!type": "fn(freq?: number, res?: number, timeFromNow?: number)",
+          "!doc": "Set the frequency and the resonance of the filter.\n",
+          "!url": "https://p5js.org/reference/#/p5/set"
+        },
+        "freq": {
+          "!type": "fn(freq: number, timeFromNow?: number) -> number",
+          "!doc": "Set the filter frequency, in Hz, from 10 to 22050 (the range of\nhuman hearing, although in reality most people hear in a narrower\nrange).\n",
+          "!url": "https://p5js.org/reference/#/p5/freq"
+        },
+        "res": {
+          "!type": "fn(res: number, timeFromNow?: number) -> number",
+          "!doc": "Controls either width of a bandpass frequency,\nor the resonance of a low/highpass cutoff frequency.\n",
+          "!url": "https://p5js.org/reference/#/p5/res"
+        },
+        "gain": {
+          "!type": "fn(gain: number) -> number",
+          "!doc": "Controls the gain attribute of a Biquad Filter.\nThis is distinctly different from .amp() which is inherited from p5.Effect\n.amp() controls the volume via the output gain node\np5.Filter.gain() controls the gain parameter of a Biquad Filter node.\n",
+          "!url": "https://p5js.org/reference/#/p5/gain"
+        },
+        "toggle": {
+          "!type": "fn() -> bool",
+          "!doc": "Toggle function. Switches between the specified type and allpass\n",
+          "!url": "https://p5js.org/reference/#/p5/toggle"
+        },
+        "setType": {
+          "!type": "fn(t: string)",
+          "!doc": "Set the type of a p5.Filter. Possible types include:\n&quot;lowpass&quot; (default), &quot;highpass&quot;, &quot;bandpass&quot;,\n&quot;lowshelf&quot;, &quot;highshelf&quot;, &quot;peaking&quot;, &quot;notch&quot;,\n&quot;allpass&quot;.\n",
+          "!url": "https://p5js.org/reference/#/p5/setType"
+        }
+      }
+    },
+    "EQ": {
+      "!type": "fn(_eqsize?: number) -> +p5.sound.p5.EQ",
+      "!proto": "p5.sound.p5.Effect",
+      "!doc": "p5.EQ is an audio effect that performs the function of a multiband\naudio equalizer. Equalization is used to adjust the balance of\nfrequency compoenents of an audio signal. This process is commonly used\nin sound production and recording to change the waveform before it reaches\na sound output device. EQ can also be used as an audio effect to create\ninteresting distortions by filtering out parts of the spectrum. p5.EQ is\nbuilt using a chain of Web Audio Biquad Filter Nodes and can be\ninstantiated with 3 or 8 bands. Bands can be added or removed from\nthe EQ by directly modifying p5.EQ.bands (the array that stores filters).\nThis class extends <a href = \"/reference/#/p5.Effect\">p5.Effect</a>.\nMethods <a href = \"/reference/#/p5.Effect/amp\">amp()</a>, <a href = \"/reference/#/p5.Effect/chain\">chain()</a>,\n<a href = \"/reference/#/p5.Effect/drywet\">drywet()</a>, <a href = \"/reference/#/p5.Effect/connect\">connect()</a>, and\n<a href = \"/reference/#/p5.Effect/disconnect\">disconnect()</a> are available.\n",
+      "!url": "https://p5js.org/reference/#/p5/p5.EQ",
+      "prototype": {
+        "bands": {
+          "!type": "+Array",
+          "!doc": "The p5.EQ is built with abstracted p5.Filter objects.\nTo modify any bands, use methods of the <a \nhref=\"/reference/#/p5.Filter\" title=\"p5.Filter reference\">\np5.Filter</a> API, especially <code>gain</code> and <code>freq</code>.\nBands are stored in an array, with indices 0 - 3, or 0 - 7\n",
+          "!url": "https://p5js.org/reference/#/p5/bands"
+        },
+        "process": {
+          "!type": "fn(src: Object)",
+          "!doc": "Process an input by connecting it to the EQ\n",
+          "!url": "https://p5js.org/reference/#/p5/process"
+        }
+      }
+    },
+    "Panner3D": {
+      "!type": "fn() -> +p5.sound.p5.Panner3D",
+      "!doc": "Panner3D is based on the <a title=\"Web Audio Panner docs\"  href=\n\"https://developer.mozilla.org/en-US/docs/Web/API/PannerNode\">\nWeb Audio Spatial Panner Node</a>.\nThis panner is a spatial processing node that allows audio to be positioned\nand oriented in 3D space.\nThe position is relative to an <a title=\"Web Audio Listener docs\" href=\n\"https://developer.mozilla.org/en-US/docs/Web/API/AudioListener\">\nAudio Context Listener</a>, which can be accessed\nby <code>p5.soundOut.audiocontext.listener</code>\n",
+      "!url": "https://p5js.org/reference/#/p5/p5.Panner3D",
+      "prototype": {
+        "panner": {
+          "!type": "+AudioNode",
+          "!doc": "<a title=\"Web Audio Panner docs\"  href=\n\"https://developer.mozilla.org/en-US/docs/Web/API/PannerNode\">\nWeb Audio Spatial Panner Node</a>\nProperties include\n<ul>\n<li>&lt;a title=&quot;w3 spec for Panning Model&quot;\nhref=&quot;<a href=\"https://www.w3.org/TR/webaudio/#idl-def-PanningModelType\">https://www.w3.org/TR/webaudio/#idl-def-PanningModelType</a>&quot;<blockquote>\npanningModel</a>: &quot;equal power&quot; or &quot;HRTF&quot;\n</blockquote>\n</li>\n<li>&lt;a title=&quot;w3 spec for Distance Model&quot;\nhref=&quot;<a href=\"https://www.w3.org/TR/webaudio/#idl-def-DistanceModelType\">https://www.w3.org/TR/webaudio/#idl-def-DistanceModelType</a>&quot;<blockquote>\ndistanceModel</a>: &quot;linear&quot;, &quot;inverse&quot;, or &quot;exponential&quot;\n</blockquote>\n</li>\n</ul>\n",
+          "!url": "https://p5js.org/reference/#/p5/panner"
+        },
+        "process": {
+          "!type": "fn(src: Object)",
+          "!doc": "Connect an audio sorce\n",
+          "!url": "https://p5js.org/reference/#/p5/process"
+        },
+        "set": {
+          "!type": "fn(xVal: number, yVal: number, zVal: number, time: number) -> +Array",
+          "!doc": "Set the X,Y,Z position of the Panner\n",
+          "!url": "https://p5js.org/reference/#/p5/set"
+        },
+        "positionX": {
+          "!type": "fn() -> number",
+          "!doc": "Getter and setter methods for position coordinates\n",
+          "!url": "https://p5js.org/reference/#/p5/positionX"
+        },
+        "positionY": {
+          "!type": "fn() -> number",
+          "!doc": "Getter and setter methods for position coordinates\n",
+          "!url": "https://p5js.org/reference/#/p5/positionY"
+        },
+        "positionZ": {
+          "!type": "fn() -> number",
+          "!doc": "Getter and setter methods for position coordinates\n",
+          "!url": "https://p5js.org/reference/#/p5/positionZ"
+        },
+        "orient": {
+          "!type": "fn(xVal: number, yVal: number, zVal: number, time: number) -> +Array",
+          "!doc": "Set the X,Y,Z position of the Panner\n",
+          "!url": "https://p5js.org/reference/#/p5/orient"
+        },
+        "orientX": {
+          "!type": "fn() -> number",
+          "!doc": "Getter and setter methods for orient coordinates\n",
+          "!url": "https://p5js.org/reference/#/p5/orientX"
+        },
+        "orientY": {
+          "!type": "fn() -> number",
+          "!doc": "Getter and setter methods for orient coordinates\n",
+          "!url": "https://p5js.org/reference/#/p5/orientY"
+        },
+        "orientZ": {
+          "!type": "fn() -> number",
+          "!doc": "Getter and setter methods for orient coordinates\n",
+          "!url": "https://p5js.org/reference/#/p5/orientZ"
+        },
+        "setFalloff": {
+          "!type": "fn(maxDistance?: number, rolloffFactor?: number)",
+          "!doc": "Set the rolloff factor and max distance\n",
+          "!url": "https://p5js.org/reference/#/p5/setFalloff"
+        },
+        "maxDist": {
+          "!type": "fn(maxDistance: number) -> number",
+          "!doc": "Maxium distance between the source and the listener\n",
+          "!url": "https://p5js.org/reference/#/p5/maxDist"
+        },
+        "rollof": {
+          "!type": "fn(rolloffFactor: number) -> number",
+          "!doc": "How quickly the volume is reduced as the source moves away from the listener\n",
+          "!url": "https://p5js.org/reference/#/p5/rollof"
+        }
+      }
+    },
+    "Delay": {
+      "!type": "fn() -> +p5.sound.p5.Delay",
+      "!proto": "p5.sound.p5.Effect",
+      "!doc": "Delay is an echo effect. It processes an existing sound source,\nand outputs a delayed version of that sound. The p5.Delay can\nproduce different effects depending on the delayTime, feedback,\nfilter, and type. In the example below, a feedback of 0.5 (the\ndefaul value) will produce a looping delay that decreases in\nvolume by 50% each repeat. A filter will cut out the high\nfrequencies so that the delay does not sound as piercing as the\noriginal source.\nThis class extends <a href = \"/reference/#/p5.Effect\">p5.Effect</a>.<br>Methods <a href = \"/reference/#/p5.Effect/amp\">amp()</a>, <a href = \"/reference/#/p5.Effect/chain\">chain()</a>, \n<a href = \"/reference/#/p5.Effect/drywet\">drywet()</a>, <a href = \"/reference/#/p5.Effect/connect\">connect()</a>, and \n<a href = \"/reference/#/p5.Effect/disconnect\">disconnect()</a> are available.\n",
+      "!url": "https://p5js.org/reference/#/p5/p5.Delay",
+      "prototype": {
+        "leftDelay": {
+          "!type": "+DelayNode",
+          "!doc": "The p5.Delay is built with two\n<a href=\"http://www.w3.org/TR/webaudio/#DelayNode\">\nWeb Audio Delay Nodes</a>, one for each stereo channel.\n",
+          "!url": "https://p5js.org/reference/#/p5/leftDelay"
+        },
+        "rightDelay": {
+          "!type": "+DelayNode",
+          "!doc": "The p5.Delay is built with two\n<a href=\"http://www.w3.org/TR/webaudio/#DelayNode\">\nWeb Audio Delay Nodes</a>, one for each stereo channel.\n",
+          "!url": "https://p5js.org/reference/#/p5/rightDelay"
+        },
+        "process": {
+          "!type": "fn(Signal: Object, delayTime?: number, feedback?: number, lowPass?: number)",
+          "!doc": "Add delay to an audio signal according to a set\nof delay parameters.\n",
+          "!url": "https://p5js.org/reference/#/p5/process"
+        },
+        "delayTime": {
+          "!type": "fn(delayTime: number)",
+          "!doc": "Set the delay (echo) time, in seconds. Usually this value will be\na floating point number between 0.0 and 1.0.\n",
+          "!url": "https://p5js.org/reference/#/p5/delayTime"
+        },
+        "feedback": {
+          "!type": "fn(feedback: number) -> number",
+          "!doc": "Feedback occurs when Delay sends its signal back through its input\nin a loop. The feedback amount determines how much signal to send each\ntime through the loop. A feedback greater than 1.0 is not desirable because\nit will increase the overall output each time through the loop,\ncreating an infinite feedback loop. The default value is 0.5\n",
+          "!url": "https://p5js.org/reference/#/p5/feedback"
+        },
+        "filter": {
+          "!type": "fn(cutoffFreq: number, res: number)",
+          "!doc": "Set a lowpass filter frequency for the delay. A lowpass filter\nwill cut off any frequencies higher than the filter frequency.\n",
+          "!url": "https://p5js.org/reference/#/p5/filter"
+        },
+        "setType": {
+          "!type": "fn(type: string)",
+          "!doc": "Choose a preset type of delay. &#39;pingPong&#39; bounces the signal\nfrom the left to the right channel to produce a stereo effect.\nAny other parameter will revert to the default delay setting.\n",
+          "!url": "https://p5js.org/reference/#/p5/setType"
+        },
+        "amp": {
+          "!type": "fn(volume: number, rampTime?: number, timeFromNow?: number)",
+          "!doc": "Set the output level of the delay effect.\n",
+          "!url": "https://p5js.org/reference/#/p5/amp"
+        },
+        "connect": {
+          "!type": "fn(unit: Object)",
+          "!doc": "Send output to a p5.sound or web audio object\n",
+          "!url": "https://p5js.org/reference/#/p5/connect"
+        },
+        "disconnect": {
+          "!type": "fn()",
+          "!doc": "Disconnect all output.\n",
+          "!url": "https://p5js.org/reference/#/p5/disconnect"
+        }
+      }
+    },
+    "Reverb": {
+      "!type": "fn() -> +p5.sound.p5.Reverb",
+      "!proto": "p5.sound.p5.Effect",
+      "!doc": "Reverb adds depth to a sound through a large number of decaying\nechoes. It creates the perception that sound is occurring in a\nphysical space. The p5.Reverb has paramters for Time (how long does the\nreverb last) and decayRate (how much the sound decays with each echo)\nthat can be set with the .set() or .process() methods. The p5.Convolver\nextends p5.Reverb allowing you to recreate the sound of actual physical\nspaces through convolution.\nThis class extends <a href = \"/reference/#/p5.Effect\">p5.Effect</a>.<br>Methods <a href = \"/reference/#/p5.Effect/amp\">amp()</a>, <a href = \"/reference/#/p5.Effect/chain\">chain()</a>, \n<a href = \"/reference/#/p5.Effect/drywet\">drywet()</a>, <a href = \"/reference/#/p5.Effect/connect\">connect()</a>, and \n<a href = \"/reference/#/p5.Effect/disconnect\">disconnect()</a> are available.\n",
+      "!url": "https://p5js.org/reference/#/p5/p5.Reverb",
+      "prototype": {
+        "process": {
+          "!type": "fn(src: Object, seconds?: number, decayRate?: number, reverse?: bool)",
+          "!doc": "Connect a source to the reverb, and assign reverb parameters.\n",
+          "!url": "https://p5js.org/reference/#/p5/process"
+        },
+        "set": {
+          "!type": "fn(seconds?: number, decayRate?: number, reverse?: bool)",
+          "!doc": "Set the reverb settings. Similar to .process(), but without\nassigning a new input.\n",
+          "!url": "https://p5js.org/reference/#/p5/set"
+        },
+        "amp": {
+          "!type": "fn(volume: number, rampTime?: number, timeFromNow?: number)",
+          "!doc": "Set the output level of the reverb effect.\n",
+          "!url": "https://p5js.org/reference/#/p5/amp"
+        },
+        "connect": {
+          "!type": "fn(unit: Object)",
+          "!doc": "Send output to a p5.sound or web audio object\n",
+          "!url": "https://p5js.org/reference/#/p5/connect"
+        },
+        "disconnect": {
+          "!type": "fn()",
+          "!doc": "Disconnect all output.\n",
+          "!url": "https://p5js.org/reference/#/p5/disconnect"
+        }
+      }
+    },
+    "Convolver": {
+      "!type": "fn(path: string, callback?: fn(), errorCallback?: fn()) -> +p5.sound.p5.Convolver",
+      "!proto": "p5.sound.p5.Effect",
+      "!doc": "p5.Convolver extends p5.Reverb. It can emulate the sound of real\nphysical spaces through a process called <a href=\"\nhttps://en.wikipedia.org/wiki/Convolution_reverb#Real_space_simulation\">\nconvolution</a>.\n\nConvolution multiplies any audio input by an &quot;impulse response&quot;\nto simulate the dispersion of sound over time. The impulse response is\ngenerated from an audio file that you provide. One way to\ngenerate an impulse response is to pop a balloon in a reverberant space\nand record the echo. Convolution can also be used to experiment with\nsound.\n\nUse the method <code>createConvolution(path)</code> to instantiate a\np5.Convolver with a path to your impulse response audio file.",
+      "!url": "https://p5js.org/reference/#/p5/p5.Convolver",
+      "prototype": {
+        "convolverNod": {
+          "!type": "+ConvolverNode",
+          "!doc": "Internally, the p5.Convolver uses the a\n<a href=\"http://www.w3.org/TR/webaudio/#ConvolverNode\">\nWeb Audio Convolver Node</a>.\n",
+          "!url": "https://p5js.org/reference/#/p5/convolverNod"
+        },
+        "createConvolver": {
+          "!type": "fn(path: string, callback?: fn(), errorCallback?: fn()) -> +p5.sound.p5.Convolver",
+          "!doc": "Create a p5.Convolver. Accepts a path to a soundfile\nthat will be used to generate an impulse response.\n",
+          "!url": "https://p5js.org/reference/#/p5/createConvolver"
+        },
+        "process": {
+          "!type": "fn(src: Object)",
+          "!doc": "Connect a source to the reverb, and assign reverb parameters.\n",
+          "!url": "https://p5js.org/reference/#/p5/process"
+        },
+        "impulses": {
+          "!type": "+Array",
+          "!doc": "If you load multiple impulse files using the .addImpulse method,\nthey will be stored as Objects in this Array. Toggle between them\nwith the <code>toggleImpulse(id)</code> method.\n",
+          "!url": "https://p5js.org/reference/#/p5/impulses"
+        },
+        "addImpulse": {
+          "!type": "fn(path: string, callback: fn(), errorCallback: fn())",
+          "!doc": "Load and assign a new Impulse Response to the p5.Convolver.\nThe impulse is added to the <code>.impulses</code> array. Previous\nimpulses can be accessed with the <code>.toggleImpulse(id)</code>\nmethod.\n",
+          "!url": "https://p5js.org/reference/#/p5/addImpulse"
+        },
+        "resetImpulse": {
+          "!type": "fn(path: string, callback: fn(), errorCallback: fn())",
+          "!doc": "Similar to .addImpulse, except that the <code>.impulses</code>\nArray is reset to save memory. A new <code>.impulses</code>\narray is created with this impulse as the only item.\n",
+          "!url": "https://p5js.org/reference/#/p5/resetImpulse"
+        },
+        "toggleImpulse": {
+          "!type": "fn(id: string)",
+          "!doc": "If you have used <code>.addImpulse()</code> to add multiple impulses\nto a p5.Convolver, then you can use this method to toggle between\nthe items in the <code>.impulses</code> Array. Accepts a parameter\nto identify which impulse you wish to use, identified either by its\noriginal filename (String) or by its position in the <code>.impulses\n</code> Array (Number).<br/>\nYou can access the objects in the .impulses Array directly. Each\nObject has two attributes: an <code>.audioBuffer</code> (type:\nWeb Audio <a href=\"\nhttp://webaudio.github.io/web-audio-api/#the-audiobuffer-interface\">\nAudioBuffer)</a> and a <code>.name</code>, a String that corresponds\nwith the original filename.\n",
+          "!url": "https://p5js.org/reference/#/p5/toggleImpulse"
+        },
+        "undefined": {
+          "!type": "fn()",
+          "!url": "https://p5js.org/reference/#/p5/undefined"
+        },
+        "setBPM": {
+          "!type": "fn(BPM: number, rampTime: number)",
+          "!doc": "Set the global tempo, in beats per minute, for all\np5.Parts. This method will impact all active p5.Parts.\n",
+          "!url": "https://p5js.org/reference/#/p5/setBPM"
+        }
+      }
+    },
+    "Phrase": {
+      "!type": "fn(name: string, callback: fn(), sequence: Array) -> +p5.sound.p5.Phrase",
+      "!doc": "A phrase is a pattern of musical events over time, i.e.\na series of notes and rests.\n\nPhrases must be added to a p5.Part for playback, and\neach part can play multiple phrases at the same time.\nFor example, one Phrase might be a kick drum, another\ncould be a snare, and another could be the bassline.\n\nThe first parameter is a name so that the phrase can be\nmodified or deleted later. The callback is a a function that\nthis phrase will call at every step—for example it might be\ncalled <code>playNote(value){}</code>. The array determines\nwhich value is passed into the callback at each step of the\nphrase. It can be numbers, an object with multiple numbers,\nor a zero (0) indicates a rest so the callback won&#39;t be called).",
+      "!url": "https://p5js.org/reference/#/p5/p5.Phrase",
+      "prototype": {
+        "sequence": {
+          "!type": "+Array",
+          "!doc": "Array of values to pass into the callback\nat each step of the phrase. Depending on the callback\nfunction&#39;s requirements, these values may be numbers,\nstrings, or an object with multiple parameters.\nZero (0) indicates a rest.\n",
+          "!url": "https://p5js.org/reference/#/p5/sequence"
+        }
+      }
+    },
+    "Part": {
+      "!type": "fn(steps?: number, tatums?: number) -> +p5.sound.p5.Part",
+      "!doc": "A p5.Part plays back one or more p5.Phrases. Instantiate a part\nwith steps and tatums. By default, each step represents 1/16th note.\n\nSee p5.Phrase for more about musical timing.",
+      "!url": "https://p5js.org/reference/#/p5/p5.Part",
+      "prototype": {
+        "setBPM": {
+          "!type": "fn(BPM: number, rampTime?: number)",
+          "!doc": "Set the tempo of this part, in Beats Per Minute.\n",
+          "!url": "https://p5js.org/reference/#/p5/setBPM"
+        },
+        "getBPM": {
+          "!type": "fn() -> number",
+          "!doc": "Returns the Beats Per Minute of this currently part.\n",
+          "!url": "https://p5js.org/reference/#/p5/getBPM"
+        },
+        "start": {
+          "!type": "fn(time?: number)",
+          "!doc": "Start playback of this part. It will play\nthrough all of its phrases at a speed\ndetermined by setBPM.\n",
+          "!url": "https://p5js.org/reference/#/p5/start"
+        },
+        "loop": {
+          "!type": "fn(time?: number)",
+          "!doc": "Loop playback of this part. It will begin\nlooping through all of its phrases at a speed\ndetermined by setBPM.\n",
+          "!url": "https://p5js.org/reference/#/p5/loop"
+        },
+        "noLoop": {
+          "!type": "fn()",
+          "!doc": "Tell the part to stop looping.\n",
+          "!url": "https://p5js.org/reference/#/p5/noLoop"
+        },
+        "stop": {
+          "!type": "fn(time?: number)",
+          "!doc": "Stop the part and cue it to step 0.\n",
+          "!url": "https://p5js.org/reference/#/p5/stop"
+        },
+        "pause": {
+          "!type": "fn(time: number)",
+          "!doc": "Pause the part. Playback will resume\nfrom the current step.\n",
+          "!url": "https://p5js.org/reference/#/p5/pause"
+        },
+        "addPhrase": {
+          "!type": "fn(phrase: p5.sound.p5.Phrase)",
+          "!doc": "Add a p5.Phrase to this Part.\n",
+          "!url": "https://p5js.org/reference/#/p5/addPhrase"
+        },
+        "removePhrase": {
+          "!type": "fn(phraseName: string)",
+          "!doc": "Remove a phrase from this part, based on the name it was\ngiven when it was created.\n",
+          "!url": "https://p5js.org/reference/#/p5/removePhrase"
+        },
+        "getPhrase": {
+          "!type": "fn(phraseName: string)",
+          "!doc": "Get a phrase from this part, based on the name it was\ngiven when it was created. Now you can modify its array.\n",
+          "!url": "https://p5js.org/reference/#/p5/getPhrase"
+        },
+        "replaceSequence": {
+          "!type": "fn(phraseName: string, sequence: Array)",
+          "!doc": "Get a phrase from this part, based on the name it was\ngiven when it was created. Now you can modify its array.\n",
+          "!url": "https://p5js.org/reference/#/p5/replaceSequence"
+        },
+        "onStep": {
+          "!type": "fn(callback: fn())",
+          "!doc": "Fire a callback function at every step.\n",
+          "!url": "https://p5js.org/reference/#/p5/onStep"
+        }
+      }
+    },
+    "Score": {
+      "!type": "fn(parts?: p5.sound.p5.Part) -> +p5.sound.p5.Score",
+      "!doc": "A Score consists of a series of Parts. The parts will\nbe played back in order. For example, you could have an\nA part, a B part, and a C part, and play them back in this order\n<code>new p5.Score(a, a, b, a, c)</code>\n",
+      "!url": "https://p5js.org/reference/#/p5/p5.Score",
+      "prototype": {
+        "start": {
+          "!type": "fn()",
+          "!doc": "Start playback of the score.\n",
+          "!url": "https://p5js.org/reference/#/p5/start"
+        },
+        "stop": {
+          "!type": "fn()",
+          "!doc": "Stop playback of the score.\n",
+          "!url": "https://p5js.org/reference/#/p5/stop"
+        },
+        "pause": {
+          "!type": "fn()",
+          "!doc": "Pause playback of the score.\n",
+          "!url": "https://p5js.org/reference/#/p5/pause"
+        },
+        "loop": {
+          "!type": "fn()",
+          "!doc": "Loop playback of the score.\n",
+          "!url": "https://p5js.org/reference/#/p5/loop"
+        },
+        "noLoop": {
+          "!type": "fn()",
+          "!doc": "Stop looping playback of the score. If it\nis currently playing, this will go into effect\nafter the current round of playback completes.\n",
+          "!url": "https://p5js.org/reference/#/p5/noLoop"
+        },
+        "setBPM": {
+          "!type": "fn(BPM: number, rampTime: number)",
+          "!doc": "Set the tempo for all parts in the score\n",
+          "!url": "https://p5js.org/reference/#/p5/setBPM"
+        }
+      }
+    },
+    "SoundLoop": {
+      "!type": "fn(callback: fn(), interval?: number) -> +p5.sound.p5.SoundLoop",
+      "!doc": "SoundLoop\n",
+      "!url": "https://p5js.org/reference/#/p5/p5.SoundLoop",
+      "prototype": {
+        "musicalTimeMode": {
+          "!type": "bool",
+          "!doc": "musicalTimeMode uses <a href = \"https://github.com/Tonejs/Tone.js/wiki/Time\">Tone.Time</a> convention\ntrue if string, false if number\n",
+          "!url": "https://p5js.org/reference/#/p5/musicalTimeMode"
+        },
+        "undefined": {
+          "!type": "fn()",
+          "!doc": "Do not initiate the callback if timeFromNow is &lt; 0\nThis ususually occurs for a few milliseconds when the page\nis not fully loaded\nThe callback should only be called until maxIterations is reached\n",
+          "!url": "https://p5js.org/reference/#/p5/undefined"
+        },
+        "maxIterations": {
+          "!type": "number",
+          "!doc": "Set a limit to the number of loops to play. defaults to Infinity\n",
+          "!url": "https://p5js.org/reference/#/p5/maxIterations"
+        },
+        "start": {
+          "!type": "fn(timeFromNow?: number)",
+          "!doc": "Start the loop\n",
+          "!url": "https://p5js.org/reference/#/p5/start"
+        },
+        "stop": {
+          "!type": "fn(timeFromNow?: number)",
+          "!doc": "Stop the loop\n",
+          "!url": "https://p5js.org/reference/#/p5/stop"
+        },
+        "pause": {
+          "!type": "fn(timeFromNow?: number)",
+          "!doc": "Pause the loop\n",
+          "!url": "https://p5js.org/reference/#/p5/pause"
+        },
+        "syncedStart": {
+          "!type": "fn(otherLoop: Object, timeFromNow?: number)",
+          "!doc": "Synchronize loops. Use this method to start two more more loops in synchronization\nor to start a loop in synchronization with a loop that is already playing\nThis method will schedule the implicit loop in sync with the explicit master loop\ni.e. loopToStart.syncedStart(loopToSyncWith)\n",
+          "!url": "https://p5js.org/reference/#/p5/syncedStart"
+        },
+        "bpm": {
+          "!type": "number",
+          "!doc": "Getters and Setters, setting any paramter will result in a change in the clock&#39;s\nfrequency, that will be reflected after the next callback\nbeats per minute (defaults to 60)\n",
+          "!url": "https://p5js.org/reference/#/p5/bpm"
+        },
+        "timeSignature": {
+          "!type": "number",
+          "!doc": "number of quarter notes in a measure (defaults to 4)\n",
+          "!url": "https://p5js.org/reference/#/p5/timeSignature"
+        },
+        "interval": {
+          "!type": "number",
+          "!doc": "length of the loops interval\n",
+          "!url": "https://p5js.org/reference/#/p5/interval"
+        },
+        "iterations": {
+          "!type": "number",
+          "!doc": "how many times the callback has been called so far\n",
+          "!url": "https://p5js.org/reference/#/p5/iterations"
+        }
+      }
+    },
+    "Compressor": {
+      "!type": "fn() -> +p5.sound.p5.Compressor",
+      "!proto": "p5.sound.p5.Effect",
+      "!doc": "Compressor is an audio effect class that performs dynamics compression\non an audio input source. This is a very commonly used technique in music\nand sound production. Compression creates an overall louder, richer, \nand fuller sound by lowering the volume of louds and raising that of softs.\nCompression can be used to avoid clipping (sound distortion due to \npeaks in volume) and is especially useful when many sounds are played \nat once. Compression can be used on indivudal sound sources in addition\nto the master output.  \nThis class extends <a href = \"/reference/#/p5.Effect\">p5.Effect</a>.<br>Methods <a href = \"/reference/#/p5.Effect/amp\">amp()</a>, <a href = \"/reference/#/p5.Effect/chain\">chain()</a>, \n<a href = \"/reference/#/p5.Effect/drywet\">drywet()</a>, <a href = \"/reference/#/p5.Effect/connect\">connect()</a>, and \n<a href = \"/reference/#/p5.Effect/disconnect\">disconnect()</a> are available.\n",
+      "!url": "https://p5js.org/reference/#/p5/p5.Compressor",
+      "prototype": {
+        "compressor": {
+          "!type": "+AudioNode",
+          "!doc": "The p5.Compressor is built with a <a href=\"https://www.w3.org/TR/webaudio/#the-dynamicscompressornode-interface\" \n  target=\"_blank\" title=\"W3 spec for Dynamics Compressor Node\">Web Audio Dynamics Compressor Node\n  </a>\n",
+          "!url": "https://p5js.org/reference/#/p5/compressor"
+        },
+        "process": {
+          "!type": "fn(src: Object, attack?: number, knee?: number, ratio?: number, threshold?: number, release?: number)",
+          "!doc": "Performs the same function as .connect, but also accepts\noptional parameters to set compressor&#39;s audioParams\n",
+          "!url": "https://p5js.org/reference/#/p5/process"
+        },
+        "set": {
+          "!type": "fn(attack: number, knee: number, ratio: number, threshold: number, release: number)",
+          "!doc": "Set the paramters of a compressor.\n",
+          "!url": "https://p5js.org/reference/#/p5/set"
+        },
+        "attack": {
+          "!type": "fn(attack?: number, time?: number)",
+          "!doc": "Get current attack or set value w/ time ramp\n",
+          "!url": "https://p5js.org/reference/#/p5/attack"
+        },
+        "knee": {
+          "!type": "fn(knee?: number, time?: number)",
+          "!doc": "Get current knee or set value w/ time ramp\n",
+          "!url": "https://p5js.org/reference/#/p5/knee"
+        },
+        "ratio": {
+          "!type": "fn(ratio?: number, time?: number)",
+          "!doc": "Get current ratio or set value w/ time ramp\n",
+          "!url": "https://p5js.org/reference/#/p5/ratio"
+        },
+        "threshold": {
+          "!type": "fn(threshold: number, time?: number)",
+          "!doc": "Get current threshold or set value w/ time ramp\n",
+          "!url": "https://p5js.org/reference/#/p5/threshold"
+        },
+        "release": {
+          "!type": "fn(release: number, time?: number)",
+          "!doc": "Get current release or set value w/ time ramp\n",
+          "!url": "https://p5js.org/reference/#/p5/release"
+        },
+        "reduction": {
+          "!type": "fn() -> number",
+          "!doc": "Return the current reduction value\n",
+          "!url": "https://p5js.org/reference/#/p5/reduction"
+        }
+      }
+    },
+    "SoundRecorder": {
+      "!type": "fn() -> +p5.sound.p5.SoundRecorder",
+      "!doc": "Record sounds for playback and/or to save as a .wav file.\nThe p5.SoundRecorder records all sound output from your sketch,\nor can be assigned a specific source with setInput().\nThe record() method accepts a p5.SoundFile as a parameter.\nWhen playback is stopped (either after the given amount of time,\nor with the stop() method), the p5.SoundRecorder will send its\nrecording to that p5.SoundFile for playback.",
+      "!url": "https://p5js.org/reference/#/p5/p5.SoundRecorder",
+      "prototype": {
+        "setInput": {
+          "!type": "fn(unit?: Object)",
+          "!doc": "Connect a specific device to the p5.SoundRecorder.\nIf no parameter is given, p5.SoundRecorer will record\nall audible p5.sound from your sketch.\n",
+          "!url": "https://p5js.org/reference/#/p5/setInput"
+        },
+        "record": {
+          "!type": "fn(soundFile: p5.sound.p5.SoundFile, duration?: number, callback?: fn())",
+          "!doc": "Start recording. To access the recording, provide\na p5.SoundFile as the first parameter. The p5.SoundRecorder\nwill send its recording to that p5.SoundFile for playback once\nrecording is complete. Optional parameters include duration\n(in seconds) of the recording, and a callback function that\nwill be called once the complete recording has been\ntransfered to the p5.SoundFile.\n",
+          "!url": "https://p5js.org/reference/#/p5/record"
+        },
+        "stop": {
+          "!type": "fn()",
+          "!doc": "Stop the recording. Once the recording is stopped,\nthe results will be sent to the p5.SoundFile that\nwas given on .record(), and if a callback function\nwas provided on record, that function will be called.\n",
+          "!url": "https://p5js.org/reference/#/p5/stop"
+        },
+        "saveSound": {
+          "!type": "fn(soundFile: p5.sound.p5.SoundFile, name: string)",
+          "!doc": "Save a p5.SoundFile as a .wav audio file.\n",
+          "!url": "https://p5js.org/reference/#/p5/saveSound"
+        }
+      }
+    },
+    "PeakDetect": {
+      "!type": "fn(freq1?: number, freq2?: number, threshold?: number, framesPerPeak?: number) -> +p5.sound.p5.PeakDetect",
+      "!doc": "PeakDetect works in conjunction with p5.FFT to\nlook for onsets in some or all of the frequency spectrum.\n\n\nTo use p5.PeakDetect, call <code>update</code> in the draw loop\nand pass in a p5.FFT object.\n\n\nYou can listen for a specific part of the frequency spectrum by\nsetting the range between <code>freq1</code> and <code>freq2</code>.\n\n\n<code>threshold</code> is the threshold for detecting a peak,\nscaled between 0 and 1. It is logarithmic, so 0.1 is half as loud\nas 1.0.\n\n\nThe update method is meant to be run in the draw loop, and\n<b>frames</b> determines how many loops must pass before\nanother peak can be detected.\nFor example, if the frameRate() = 60, you could detect the beat of a\n120 beat-per-minute song with this equation:\n<code> framesPerPeak = 60 / (estimatedBPM / 60 );</code>\n\n\n\nBased on example contribtued by @b2renger, and a simple beat detection\nexplanation by <a href=\"a\nhref=&quot;http://www.airtightinteractive.com/2013/10/making-audio-reactive-visuals/&quot;\ntarget=&quot;_blank&quot;\">a\nhref=&quot;http://www.airtightinteractive.com/2013/10/making-audio-reactive-visuals/&quot;\ntarget=&quot;_blank&quot;</a>Felix Turner</a>.\n",
+      "!url": "https://p5js.org/reference/#/p5/p5.PeakDetect",
+      "prototype": {
+        "isDetected": {
+          "!type": "fn()",
+          "!doc": "isDetected is set to true when a peak is detected.\n",
+          "!url": "https://p5js.org/reference/#/p5/isDetected"
+        },
+        "update": {
+          "!type": "fn(fftObject: p5.sound.p5.FFT)",
+          "!doc": "The update method is run in the draw loop.\nAccepts an FFT object. You must call .analyze()\non the FFT object prior to updating the peakDetect\nbecause it relies on a completed FFT analysis.\n",
+          "!url": "https://p5js.org/reference/#/p5/update"
+        },
+        "onPeak": {
+          "!type": "fn(callback: fn(), val?: Object)",
+          "!doc": "onPeak accepts two arguments: a function to call when\na peak is detected. The value of the peak,\nbetween 0.0 and 1.0, is passed to the callback.\n",
+          "!url": "https://p5js.org/reference/#/p5/onPeak"
+        }
+      }
+    },
+    "Gain": {
+      "!type": "fn() -> +p5.sound.p5.Gain",
+      "!doc": "A gain node is usefull to set the relative volume of sound.\nIt&#39;s typically used to build mixers.\n",
+      "!url": "https://p5js.org/reference/#/p5/p5.Gain",
+      "prototype": {
+        "setInput": {
+          "!type": "fn(src: Object)",
+          "!doc": "Connect a source to the gain node.\n",
+          "!url": "https://p5js.org/reference/#/p5/setInput"
+        },
+        "connect": {
+          "!type": "fn(unit: Object)",
+          "!doc": "Send output to a p5.sound or web audio object\n",
+          "!url": "https://p5js.org/reference/#/p5/connect"
+        },
+        "disconnect": {
+          "!type": "fn()",
+          "!doc": "Disconnect all output.\n",
+          "!url": "https://p5js.org/reference/#/p5/disconnect"
+        },
+        "amp": {
+          "!type": "fn(volume: number, rampTime?: number, timeFromNow?: number)",
+          "!doc": "Set the output level of the gain node.\n",
+          "!url": "https://p5js.org/reference/#/p5/amp"
+        }
+      }
+    },
+    "AudioVoice": {
+      "!type": "fn() -> +p5.sound.p5.AudioVoice",
+      "!doc": "Base class for monophonic synthesizers. Any extensions of this class\nshould follow the API and implement the methods below in order to \nremain compatible with p5.PolySynth();\n",
+      "!url": "https://p5js.org/reference/#/p5/p5.AudioVoice",
+      "prototype": {
+        "connect": {
+          "!type": "fn(unit: Object)",
+          "!doc": "Connect to p5 objects or Web Audio Nodes\n",
+          "!url": "https://p5js.org/reference/#/p5/connect"
+        },
+        "disconnect": {
+          "!type": "fn()",
+          "!doc": "Disconnect from soundOut\n",
+          "!url": "https://p5js.org/reference/#/p5/disconnect"
+        }
+      }
+    },
+    "MonoSynth": {
+      "!type": "fn() -> +p5.sound.p5.MonoSynth",
+      "!doc": "An MonoSynth is used as a single voice for sound synthesis.\nThis is a class to be used in conjonction with the PolySynth\nclass. Custom synthetisers should be built inheriting from\nthis class.\n",
+      "!url": "https://p5js.org/reference/#/p5/p5.MonoSynth",
+      "prototype": {
+        "play": {
+          "!type": "fn(note: string, velocity?: number, secondsFromNow?: number, sustainTime?: number)",
+          "!doc": "Play tells the MonoSynth to start playing a note. This method schedules\nthe calling of .triggerAttack and .triggerRelease.\n",
+          "!url": "https://p5js.org/reference/#/p5/play"
+        },
+        "triggerAttack": {
+          "!type": "fn(note: string, velocity?: number, secondsFromNow?: number)",
+          "!doc": "Trigger the Attack, and Decay portion of the Envelope.\nSimilar to holding down a key on a piano, but it will\nhold the sustain level until you let go.\n",
+          "!url": "https://p5js.org/reference/#/p5/triggerAttack"
+        },
+        "triggerRelease": {
+          "!type": "fn(secondsFromNow: number)",
+          "!doc": "Trigger the release of the Envelope. This is similar to releasing\nthe key on a piano and letting the sound fade according to the\nrelease level and release time.\n",
+          "!url": "https://p5js.org/reference/#/p5/triggerRelease"
+        },
+        "setADSR": {
+          "!type": "fn(attackTime: number, decayTime?: number, susRatio?: number, releaseTime?: number)",
+          "!doc": "Set values like a traditional\n<a href=\"https://en.wikipedia.org/wiki/Synthesizer#/media/File:ADSR_parameter.svg\">\nADSR envelope\n</a>.\n",
+          "!url": "https://p5js.org/reference/#/p5/setADSR"
+        },
+        "attack": {
+          "!type": "number",
+          "!doc": "Getters and Setters\n",
+          "!url": "https://p5js.org/reference/#/p5/attack"
+        },
+        "decay": {
+          "!type": "number",
+          "!url": "https://p5js.org/reference/#/p5/decay"
+        },
+        "sustain": {
+          "!type": "number",
+          "!url": "https://p5js.org/reference/#/p5/sustain"
+        },
+        "release": {
+          "!type": "number",
+          "!url": "https://p5js.org/reference/#/p5/release"
+        },
+        "amp": {
+          "!type": "fn(vol: number, rampTime?: number) -> number",
+          "!doc": "MonoSynth amp\n",
+          "!url": "https://p5js.org/reference/#/p5/amp"
+        },
+        "connect": {
+          "!type": "fn(unit: Object)",
+          "!doc": "Connect to a p5.sound / Web Audio object.\n",
+          "!url": "https://p5js.org/reference/#/p5/connect"
+        },
+        "disconnect": {
+          "!type": "fn()",
+          "!doc": "Disconnect all outputs\n",
+          "!url": "https://p5js.org/reference/#/p5/disconnect"
+        },
+        "dispose": {
+          "!type": "fn()",
+          "!doc": "Get rid of the MonoSynth and free up its resources / memory.\n",
+          "!url": "https://p5js.org/reference/#/p5/dispose"
+        }
+      }
+    },
+    "PolySynth": {
+      "!type": "fn(synthVoice?: number, polyValue?: number) -> +p5.sound.p5.PolySynth",
+      "!doc": "An AudioVoice is used as a single voice for sound synthesis.\nThe PolySynth class holds an array of AudioVoice, and deals\nwith voices allocations, with setting notes to be played, and\nparameters to be set.\n",
+      "!url": "https://p5js.org/reference/#/p5/p5.PolySynth",
+      "prototype": {
+        "notes": {
+          "!type": "?",
+          "!doc": "An object that holds information about which notes have been played and \nwhich notes are currently being played. New notes are added as keys\non the fly. While a note has been attacked, but not released, the value of the\nkey is the audiovoice which is generating that note. When notes are released,\nthe value of the key becomes undefined.\n",
+          "!url": "https://p5js.org/reference/#/p5/notes"
+        },
+        "polyvalue": {
+          "!type": "?",
+          "!doc": "A PolySynth must have at least 1 voice, defaults to 8\n",
+          "!url": "https://p5js.org/reference/#/p5/polyvalue"
+        },
+        "AudioVoice": {
+          "!type": "?",
+          "!doc": "Monosynth that generates the sound for each note that is triggered. The\np5.PolySynth defaults to using the p5.MonoSynth as its voice.\n",
+          "!url": "https://p5js.org/reference/#/p5/AudioVoice"
+        },
+        "play": {
+          "!type": "fn(note?: number, velocity?: number, secondsFromNow?: number, sustainTime?: number)",
+          "!doc": "Play a note by triggering noteAttack and noteRelease with sustain time\n",
+          "!url": "https://p5js.org/reference/#/p5/play"
+        },
+        "noteADSR": {
+          "!type": "fn(note?: number, attackTime?: number, decayTime?: number, susRatio?: number, releaseTime?: number)",
+          "!doc": "noteADSR sets the envelope for a specific note that has just been triggered.\nUsing this method modifies the envelope of whichever audiovoice is being used\nto play the desired note. The envelope should be reset before noteRelease is called\nin order to prevent the modified envelope from being used on other notes.\n",
+          "!url": "https://p5js.org/reference/#/p5/noteADSR"
+        },
+        "setADSR": {
+          "!type": "fn(note?: number, attackTime?: number, decayTime?: number, susRatio?: number, releaseTime?: number)",
+          "!doc": "Set the PolySynths global envelope. This method modifies the envelopes of each\nmonosynth so that all notes are played with this envelope.\n",
+          "!url": "https://p5js.org/reference/#/p5/setADSR"
+        },
+        "noteAttack": {
+          "!type": "fn(note?: number, velocity?: number, secondsFromNow?: number)",
+          "!doc": "Trigger the Attack, and Decay portion of a MonoSynth.\nSimilar to holding down a key on a piano, but it will\nhold the sustain level until you let go.\n",
+          "!url": "https://p5js.org/reference/#/p5/noteAttack"
+        },
+        "noteRelease": {
+          "!type": "fn(note?: number, secondsFromNow?: number)",
+          "!doc": "Trigger the Release of an AudioVoice note. This is similar to releasing\nthe key on a piano and letting the sound fade according to the\nrelease level and release time.\n",
+          "!url": "https://p5js.org/reference/#/p5/noteRelease"
+        },
+        "connect": {
+          "!type": "fn(unit: Object)",
+          "!doc": "Connect to a p5.sound / Web Audio object.\n",
+          "!url": "https://p5js.org/reference/#/p5/connect"
+        },
+        "disconnect": {
+          "!type": "fn()",
+          "!doc": "Disconnect all outputs\n",
+          "!url": "https://p5js.org/reference/#/p5/disconnect"
+        },
+        "dispose": {
+          "!type": "fn()",
+          "!doc": "Get rid of the MonoSynth and free up its resources / memory.\n",
+          "!url": "https://p5js.org/reference/#/p5/dispose"
+        }
+      }
+    },
+    "Distortion": {
+      "!type": "fn(amount?: number, oversample?: string) -> +p5.sound.p5.Distortion",
+      "!proto": "p5.sound.p5.Effect",
+      "!doc": "A Distortion effect created with a Waveshaper Node,\nwith an approach adapted from\n<a href=\"http://stackoverflow.com/questions/22312841/waveshaper-node-in-webaudio-how-to-emulate-distortion\">Kevin Ennis</a>\nThis class extends <a href = \"/reference/#/p5.Effect\">p5.Effect</a>.<br>Methods <a href = \"/reference/#/p5.Effect/amp\">amp()</a>, <a href = \"/reference/#/p5.Effect/chain\">chain()</a>, \n<a href = \"/reference/#/p5.Effect/drywet\">drywet()</a>, <a href = \"/reference/#/p5.Effect/connect\">connect()</a>, and \n<a href = \"/reference/#/p5.Effect/disconnect\">disconnect()</a> are available.\n",
+      "!url": "https://p5js.org/reference/#/p5/p5.Distortion",
+      "prototype": {
+        "WaveShaperNode": {
+          "!type": "+AudioNode",
+          "!doc": "The p5.Distortion is built with a\n<a href=\"http://www.w3.org/TR/webaudio/#WaveShaperNode\">\nWeb Audio WaveShaper Node</a>.\n",
+          "!url": "https://p5js.org/reference/#/p5/WaveShaperNode"
+        },
+        "process": {
+          "!type": "fn(amount?: number, oversample?: string)",
+          "!doc": "Process a sound source, optionally specify amount and oversample values.\n",
+          "!url": "https://p5js.org/reference/#/p5/process"
+        },
+        "set": {
+          "!type": "fn(amount?: number, oversample?: string)",
+          "!doc": "Set the amount and oversample of the waveshaper distortion.\n",
+          "!url": "https://p5js.org/reference/#/p5/set"
+        },
+        "getAmount": {
+          "!type": "fn() -> number",
+          "!doc": "Return the distortion amount, typically between 0-1.\n",
+          "!url": "https://p5js.org/reference/#/p5/getAmount"
+        },
+        "getOversample": {
+          "!type": "fn() -> string",
+          "!doc": "Return the oversampling.\n",
+          "!url": "https://p5js.org/reference/#/p5/getOversample"
+        }
+      }
+    }
+  },
+
+  "sampleRate": {
+    "!type": "fn() -> number",
+    "!doc": "Returns a number representing the sample rate, in samples per second,\nof all sound objects in this audio context. It is determined by the\nsampling rate of your operating system&#39;s sound card, and it is not\ncurrently possile to change.\nIt is often 44100, or twice the range of human hearing.\n",
+    "!url": "https://p5js.org/reference/#/p5/sampleRate"
+  },
+  "freqToMidi": {
+    "!type": "fn(frequency: number) -> number",
+    "!doc": "Returns the closest MIDI note value for\na given frequency.\n",
+    "!url": "https://p5js.org/reference/#/p5/freqToMidi"
+  },
+  "midiToFreq": {
+    "!type": "fn(midiNote: number) -> number",
+    "!doc": "Returns the frequency value of a MIDI note value.\nGeneral MIDI treats notes as integers where middle C\nis 60, C# is 61, D is 62 etc. Useful for generating\nmusical frequencies with oscillators.\n",
+    "!url": "https://p5js.org/reference/#/p5/midiToFreq"
+  },
+  "soundFormats": {
+    "!type": "fn(formats?: string)",
+    "!doc": "List the SoundFile formats that you will include. LoadSound\nwill search your directory for these extensions, and will pick\na format that is compatable with the client&#39;s web browser.\n<a href=\"http://media.io/\">Here</a> is a free online file\nconverter.\n",
+    "!url": "https://p5js.org/reference/#/p5/soundFormats"
+  }
+}
